@@ -17,7 +17,7 @@ const UseReducer = () => {
         ...state,
         name: studentAll,
         isModalOpen: true,
-        modalText: 'Book is added',
+        modalText: 'Student is added',
       };
     }
     if (action.type === 'REMOVE') {
@@ -28,7 +28,7 @@ const UseReducer = () => {
         ...state,
         name: filtered,
         isModalOpen: true,
-        modalText: 'Book is Removed',
+        modalText: 'Student is Removed',
       };
     }
     return state;
