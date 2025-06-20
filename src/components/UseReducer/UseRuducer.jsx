@@ -135,7 +135,7 @@ const UseReducer = () => {
 
       <input
         className="mt-3"
-        placeholder="Search Student"
+        placeholder="Search With Name"
         value={search}
         onChange={handleSearch}
       />
