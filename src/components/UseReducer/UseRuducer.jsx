@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useState } from 'react';
 
 const sutdentList = [
-  { id: 101, name: 'jahid', subject: 'One', roll: '01' },
+  { id: 101, name: 'Jahid', subject: 'One', roll: '01' },
   { id: 102, name: 'Sharif', subject: 'Two', roll: '02' },
   { id: 103, name: 'Anamul', subject: 'Nine', roll: '03' },
   { id: 104, name: 'Hanif', subject: 'Three', roll: '04' },
@@ -34,10 +34,9 @@ const UseReducer = () => {
       };
     }
     if (action.type === 'SEARCH') {
-      const searched = [...state.name].filter((searchValue) => {
-        const value = searchValue.name.toLowerCase();
-        return value.startsWith(action.payload.toLowerCase());
-      });
+      const searched = [...state.name].filter((searchValue) =>
+        searchValue.name.toLowerCase().includes(action.payload.toLowerCase())
+      );
       return {
         ...state,
         name: searched,
@@ -140,25 +139,38 @@ const UseReducer = () => {
         onChange={handleSearch}
       />
 
-      {studentListState.name.map((student) => {
-        const { id, name, subject, roll } = student;
-        return (
-          <div key={id} className="border m-2 bg-secondary text-light ">
-            <li className="border ">ID: {id}</li>
-            <li className="border">Name: {name}</li>
-            <li className="border">Class: {subject}</li>
-            <li className="border">Roll No: {roll}</li>
-            <button
-              className="btn btn-danger"
-              onClick={() => {
-                handleRemove(id);
-              }}
-            >
-              Remove
-            </button>
-          </div>
-        );
-      })}
+      <table className="table table-striped table-hover table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Sl</th>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Roll</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {studentListState.name &&
+            studentListState.name.map((student) => (
+              <tr key={student.id}>
+                <th scope="row">#</th>
+                <td>{student.id}</td>
+                <td>{student.name}</td>
+                <td>{student.roll}</td>
+                <td key={student.id}>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => {
+                      handleRemove(student.id);
+                    }}
+                  >
+                    Remove
+                  </button>
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
     </div>
   );
 };
